@@ -1,0 +1,90 @@
+[
+  {
+    "label": "StreamStats watershed delineation (rcode=NY)",
+    "url": "https://streamstats.usgs.gov/streamstatsservices/watershed.json",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='streamstats.usgs.gov', port=443): Max retries exceeded with url: /streamstatsservices/watershed.json?rcode=NY&xlocation=-74.9668656&ylocation=42.9334279&crs=4326&includeparameters=true&includeflowtypes=false&includefeatures=true&simplify=true (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "National Map WBD: HUC12 at point",
+    "url": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/identify",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydro.nationalmap.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/wbd/MapServer/identify?geometry=-74.9668656%2C42.9334279&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=2&mapExtent=-75.0168656%2C42.8834279%2C-74.91686560000001%2C42.983427899999995&imageDisplay=600%2C600%2C96&returnGeometry=false&f=json (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "USGS NWIS site search (bounding box around site)",
+    "url": "https://waterservices.usgs.gov/nwis/site/",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='waterservices.usgs.gov', port=443): Max retries exceeded with url: /nwis/site/?format=rdb&bBox=-75.716866%2C42.183428%2C-74.216866%2C43.683428&siteType=ST&siteOutput=expanded&hasDataTypeCd=dv&parameterCd=00060&siteStatus=all (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "USGS NLDI: locate NHD flowline (COMID) at the point",
+    "url": "https://api.water.usgs.gov/nldi/linked-data/comid/position",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='api.water.usgs.gov', port=443): Max retries exceeded with url: /nldi/linked-data/comid/position?coords=POINT%28-74.9668656+42.9334279%29&f=json (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "HydroSource site root",
+    "url": "https://hydrosource.ornl.gov/",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "HydroSource ArcGIS REST catalog",
+    "url": "https://hydrosource.ornl.gov/arcgis/rest/services",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /arcgis/rest/services?f=json (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "HydroSource NSD dataset landing",
+    "url": "https://hydrosource.ornl.gov/dataset/new-stream-reach-development-nsd",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /dataset/new-stream-reach-development-nsd (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "HydroSource EHA dataset landing",
+    "url": "https://hydrosource.ornl.gov/dataset/existing-hydropower-assets-eha",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /dataset/existing-hydropower-assets-eha (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "HydroSource CKAN package search (NSD)",
+    "url": "https://hydrosource.ornl.gov/api/3/action/package_search",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /api/3/action/package_search?q=new+stream-reach+development&rows=10 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "HydroSource CKAN package search (EHA)",
+    "url": "https://hydrosource.ornl.gov/api/3/action/package_search",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /api/3/action/package_search?q=existing+hydropower+assets&rows=10 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  },
+  {
+    "label": "USACE National Inventory of Dams (nearby dams)",
+    "url": "https://nid.sec.usace.army.mil/api/dams/search",
+    "ok": false,
+    "status": null,
+    "detail": "ProxyError: HTTPSConnectionPool(host='nid.sec.usace.army.mil', port=443): Max retries exceeded with url: /api/dams/search?stateKey=NY&size=5000 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "elapsed_s": 0.0
+  }
+]
