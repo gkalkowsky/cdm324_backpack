@@ -1,90 +1,282 @@
 [
   {
-    "label": "StreamStats watershed delineation (rcode=NY)",
-    "url": "https://streamstats.usgs.gov/streamstatsservices/watershed.json",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='streamstats.usgs.gov', port=443): Max retries exceeded with url: /streamstatsservices/watershed.json?rcode=NY&xlocation=-74.9668656&ylocation=42.9334279&crs=4326&includeparameters=true&includeflowtypes=false&includefeatures=true&simplify=true (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
+    "label": "StreamStats ss-delineate: watershed delineation",
+    "url": "https://streamstats.usgs.gov/ss-delineate/v1/delineate/sshydro/NY?lat=42.9334279&lon=-74.9668656",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 3.069
   },
   {
-    "label": "National Map WBD: HUC12 at point",
-    "url": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/identify",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydro.nationalmap.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/wbd/MapServer/identify?geometry=-74.9668656%2C42.9334279&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=2&mapExtent=-75.0168656%2C42.8834279%2C-74.91686560000001%2C42.983427899999995&imageDisplay=600%2C600%2C96&returnGeometry=false&f=json (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
+    "label": "StreamStats NSS: regression regions for the basin",
+    "url": "https://streamstats.usgs.gov/nssservices/regressionregions/bylocation",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 4.369
+  },
+  {
+    "label": "StreamStats ss-hydro: compute basin characteristics",
+    "url": "https://streamstats.usgs.gov/ss-hydro/v1/basin-characteristics/calculate",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 2.834
+  },
+  {
+    "label": "National Map WBD: HUC codes at the point",
+    "url": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/identify?geometry=-74.9668656%2C42.9334279&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=2&mapExtent=-75.0168656%2C42.8834279%2C-74.91686560000001%2C42.983427899999995&imageDisplay=600%2C600%2C96&returnGeometry=false&f=json",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.829
+  },
+  {
+    "label": "StreamStats NSS: flow-duration scenarios",
+    "url": "https://streamstats.usgs.gov/nssservices/scenarios?regions=NY&statisticgroups=5&regressionregions=GC740%2CGC741%2CGC1769%2CGC1770%2CGC1804%2CGC1805%2CGC1429%2CGC1071%2CGC1734%2CGC1828%2CGC1897",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.565
+  },
+  {
+    "label": "StreamStats NSS: estimate flow-duration statistics",
+    "url": "https://streamstats.usgs.gov/nssservices/scenarios/estimate?regions=NY",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.515
   },
   {
     "label": "USGS NWIS site search (bounding box around site)",
-    "url": "https://waterservices.usgs.gov/nwis/site/",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='waterservices.usgs.gov', port=443): Max retries exceeded with url: /nwis/site/?format=rdb&bBox=-75.716866%2C42.183428%2C-74.216866%2C43.683428&siteType=ST&siteOutput=expanded&hasDataTypeCd=dv&parameterCd=00060&siteStatus=all (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
+    "url": "https://waterservices.usgs.gov/nwis/site/?format=rdb&bBox=-75.716866%2C42.183428%2C-74.216866%2C43.683428&siteType=ST&siteOutput=expanded&hasDataTypeCd=dv&parameterCd=00060&siteStatus=all",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 7.963
+  },
+  {
+    "label": "USGS NWIS daily values, gauge 01424108 (full period of record)",
+    "url": "https://waterservices.usgs.gov/nwis/dv/?format=rdb&sites=01424108&parameterCd=00060&statCd=00003&startDT=1900-01-01&endDT=2026-08-24",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.674
   },
   {
     "label": "USGS NLDI: locate NHD flowline (COMID) at the point",
-    "url": "https://api.water.usgs.gov/nldi/linked-data/comid/position",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='api.water.usgs.gov', port=443): Max retries exceeded with url: /nldi/linked-data/comid/position?coords=POINT%28-74.9668656+42.9334279%29&f=json (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "url": "https://api.water.usgs.gov/nldi/linked-data/comid/position?coords=POINT%28-74.9668656+42.9334279%29&f=json",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.473
+  },
+  {
+    "label": "USGS NLDI: downstream-main flowlines from COMID 22745729",
+    "url": "https://api.water.usgs.gov/nldi/linked-data/comid/22745729/navigation/DM/flowlines?distance=0.45720000000000005&f=json",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.797
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.933661,-74.966676",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.966676101&y=42.9336605&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.066
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.933760,-74.966550",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96654952465956&y=42.93375978164017&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.615
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.933882,-74.966489",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96648853806617&y=42.93388222192375&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 3.351
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.933988,-74.966381",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96638092533205&y=42.93398814545643&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 2.451
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934113,-74.966304",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96630429945264&y=42.934113194219634&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.064
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934238,-74.966228",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96622767357326&y=42.934238242982836&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.829
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934363,-74.966151",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96615104769386&y=42.93436329174604&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.571
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934488,-74.966074",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96607442181445&y=42.93448834050924&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.598
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934613,-74.965998",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96599779593507&y=42.93461338927244&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.541
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934745,-74.965947",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96594702147395&y=42.93474519912971&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.543
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.934878,-74.965900",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96589992917856&y=42.93487763100499&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.57
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935014,-74.965910",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96591049819382&y=42.93501446882574&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.815
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935151,-74.965921",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.9659210672091&y=42.9351513066465&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.501
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935288,-74.965933",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96593291007302&y=42.93528794221859&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.506
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935416,-74.966001",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96600071518957&y=42.935415692676145&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 1.204
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935543,-74.966069",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96606852030611&y=42.9355434431337&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.818
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935671,-74.966136",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96613632542265&y=42.93567119359126&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.616
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935780,-74.966247",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.966247346909&y=42.93578000748977&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.745
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.935892,-74.966345",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96634505940828&y=42.93589233606146&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.54
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.936018,-74.966401",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.96640119790806&y=42.936017994774026&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.664
+  },
+  {
+    "label": "USGS 3DEP EPQS elevation @ 42.936136,-74.966466",
+    "url": "https://epqs.nationalmap.gov/v1/json?x=-74.9664661442373&y=42.93613577032598&units=Feet&wkid=4326&includeDate=false",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 3.508
+  },
+  {
+    "label": "National Map NHD: flowline attributes for COMID 22745729",
+    "url": "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/4/query?where=COMID%3D22745729&outFields=COMID%2CGNIS_NAME%2CLENGTHKM%2CFTYPE&returnGeometry=false&f=json",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 6.307
+  },
+  {
+    "label": "ORNL HydroSource NSD (New Stream-reach Development) (cached)",
+    "url": "https://hydrosource.s3.us-east-2.amazonaws.com/files/data/datasets/hydropower-potential-new-stream-reach-development-mid-atlantic-region/NHAAP_NSD_SR_02_v1.xlsx",
+    "ok": true,
+    "status": 200,
+    "detail": "from local cache",
     "elapsed_s": 0.0
   },
   {
-    "label": "HydroSource site root",
-    "url": "https://hydrosource.ornl.gov/",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "label": "USACE National Inventory of Dams (cached)",
+    "url": "https://nid.sec.usace.army.mil/api/nation/csv",
+    "ok": true,
+    "status": 200,
+    "detail": "from local cache",
     "elapsed_s": 0.0
   },
   {
-    "label": "HydroSource ArcGIS REST catalog",
-    "url": "https://hydrosource.ornl.gov/arcgis/rest/services",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /arcgis/rest/services?f=json (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
-  },
-  {
-    "label": "HydroSource NSD dataset landing",
-    "url": "https://hydrosource.ornl.gov/dataset/new-stream-reach-development-nsd",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /dataset/new-stream-reach-development-nsd (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
-  },
-  {
-    "label": "HydroSource EHA dataset landing",
-    "url": "https://hydrosource.ornl.gov/dataset/existing-hydropower-assets-eha",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /dataset/existing-hydropower-assets-eha (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
-  },
-  {
-    "label": "HydroSource CKAN package search (NSD)",
-    "url": "https://hydrosource.ornl.gov/api/3/action/package_search",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /api/3/action/package_search?q=new+stream-reach+development&rows=10 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
-  },
-  {
-    "label": "HydroSource CKAN package search (EHA)",
-    "url": "https://hydrosource.ornl.gov/api/3/action/package_search",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='hydrosource.ornl.gov', port=443): Max retries exceeded with url: /api/3/action/package_search?q=existing+hydropower+assets&rows=10 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
-  },
-  {
-    "label": "USACE National Inventory of Dams (nearby dams)",
-    "url": "https://nid.sec.usace.army.mil/api/dams/search",
-    "ok": false,
-    "status": null,
-    "detail": "ProxyError: HTTPSConnectionPool(host='nid.sec.usace.army.mil', port=443): Max retries exceeded with url: /api/dams/search?stateKey=NY&size=5000 (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
-    "elapsed_s": 0.0
+    "label": "ORNL HydroSource EHA (Existing Hydropower Assets)",
+    "url": "https://hydrosource.ornl.gov/wp-json/wp/v2/search?search=EHA+plant&per_page=5",
+    "ok": true,
+    "status": 200,
+    "detail": "OK",
+    "elapsed_s": 0.299
   }
 ]

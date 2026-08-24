@@ -23,12 +23,20 @@ Options: `--lat --lon --rcode --run-ft --step-ft --out --provenance-json`.
 
 | Step | Source |
 |---|---|
-| 1. Watershed delineation + basin characteristics | USGS StreamStats (`rcode=NY`) |
+| 1. Watershed delineation + basin characteristics | USGS StreamStats `ss-delineate` + `ss-hydro` |
 | 2. Flow-duration curve | StreamStats regression stats; falls back to nearest comparable USGS NWIS gauge scaled by drainage-area ratio |
 | 3. Gross head | USGS NLDI downstream channel trace + USGS 3DEP EPQS elevations |
 | 4. Power | `P(kW) = 9.81 * Q(m3/s) * H(m) * efficiency` at 60 / 65 / 70% |
-| 5. DOE cross-check | ORNL HydroSource (NSD) |
-| 6. Constraints | ORNL EHA, USACE NID, WBD/HUC, FERC threshold summary |
+| 5. DOE cross-check | ORNL HydroSource NSD, by HUC10 |
+| 6. Constraints | USACE NID (national CSV, filtered locally), ORNL EHA, WBD/HUC, FERC threshold summary |
+
+The legacy `/streamstatsservices/*.json` API is retired and returns 404. This
+script uses the current five-call chain (delineate → regression regions →
+scenarios → basin characteristics → estimate) per the USGS
+"StreamStats Flow Statistics Workflow" notebook.
+
+Large downloads (the ~65 MB NID national CSV and the NSD workbooks) are cached;
+point `--cache-dir` at a scratch directory to keep them out of the repo.
 
 ## Design rule: no invented numbers
 
@@ -40,18 +48,36 @@ the power section refuses to compute rather than guess.
 
 ## Status of the committed report
 
-The committed `ocquionis_creek_microhydro_report.md` is a **failed run**:
-all 11 API calls returned `403 Forbidden` at the sandbox egress proxy that
-generated it. It contains no site data — it is committed as a record of
-which endpoints were attempted and how they failed. Re-run from a network
-that can reach `streamstats.usgs.gov`, `waterservices.usgs.gov`,
-`api.water.usgs.gov`, `epqs.nationalmap.gov`, `hydro.nationalmap.gov`,
-`hydrosource.ornl.gov` and `nid.sec.usace.army.mil` to populate it.
+The committed `ocquionis_creek_microhydro_report.md` is a **complete live
+run**: 35 of 35 API calls succeeded. Headline results for the supplied
+coordinate:
+
+| | |
+|---|---|
+| Stream at the coordinate | **Flat Creek** (not Ocquionis Creek — see the report) |
+| Drainage area | 1.16 sq mi |
+| Gross head | 20.5 ft over 1,000 ft |
+| Q50 / Q90 flow | 1.32 / 0.098 cfs |
+| Power at 65% | 1.49 kW (median), 0.11 kW (low flow) |
+
+Two findings drive the report and are easy to miss:
+
+1. **The coordinate is not on the stream it was described as.** NHD names
+   the flowline Flat Creek, in the Mohawk/Hudson basin, not Ocquionis
+   Creek's Susquehanna basin.
+2. **New York's flow-duration regression does not apply to this basin.**
+   `DRNAREA` = 1.16 sq mi is below the equation's 3.14 sq mi minimum, and
+   `SSURGOA` = 0 is below its minimum. Because these equations are products
+   of powers, a zero-valued parameter with a positive exponent collapses the
+   whole product, so StreamStats returns exactly `0.0` for D75 through D99.
+   Those zeros are an artifact, **not** a prediction that the creek runs
+   dry; the script detects and suppresses them rather than reporting a dry
+   stream, and falls back to a gauge transfer.
 
 The computational core (RDB parsing, flow-duration percentiles,
-drainage-area ratio scaling, the power equation and annual-energy
-integration) is verified independently against synthetic inputs and is
-unaffected by the network failure.
+drainage-area ratio scaling, the power equation, annual-energy integration,
+and the zero-artifact detector) is verified independently against synthetic
+inputs.
 
 ## Caveats that survive a successful run
 

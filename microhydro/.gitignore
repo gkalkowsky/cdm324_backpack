@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+nid_nation.csv
+NHAAP_NSD_*.xlsx
+run.log
